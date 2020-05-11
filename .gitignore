@@ -1,0 +1,16 @@
+**/node_modules/**/*
+**/*.pyc
+server.key
+server.crt
+__pycache__
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+web-report/
+
+# macOS
+.DS_Store
