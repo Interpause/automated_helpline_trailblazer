@@ -1,0 +1,9 @@
+:root {font-size:2vh;}
+#google_translate_element > div > div {display:inline-flex;}
+.goog-te-gadget-simple {font-size:1rem !important;}
+.goog-te-gadget-icon {
+    width:1.5rem !important;
+    height:1.5rem !important;
+    background-position: 1.5rem 0px !important;
+    background-size: cover !important;
+}

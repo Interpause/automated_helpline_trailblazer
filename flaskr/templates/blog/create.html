@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% from 'blog/editor.html' import editor %}
+
+{% block header %}
+  <h1>{% block title %}New Post{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+{{ editor() }}
+{% endblock %}

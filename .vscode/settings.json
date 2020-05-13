@@ -5,5 +5,14 @@
     ],
     "cSpell.ignoreWords": [
         "userid"
+    ],
+    "sqltools.connections": [
+        {
+            "database": ".\\instance/test.db",
+            "dialect": "SQLite",
+            "isActive": true,
+            "isConnected": true,
+            "name": "test"
+        }
     ]
 }

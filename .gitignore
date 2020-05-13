@@ -1,8 +1,8 @@
-**/node_modules/**/*
 **/*.pyc
 server.key
 server.crt
 __pycache__
+instance
 *.jks
 *.p8
 *.p12
