@@ -3,12 +3,12 @@ from uuid import uuid4
 from datetime import datetime
 from .auth import login_required
 
-bp = Blueprint('forum', __name__,url_prefix='/forum')
+bp = Blueprint('news', __name__,url_prefix='/news')
 
 @bp.route("/index")
 def index():
-    posts = g.db_posts.query.all()
-    return render_template('forum/forum.html', posts=posts)
+    articles = g.db_news.query.all()
+    return render_template('news/news.html', articles=articles)
 
 @bp.route('/create', methods=('GET', 'POST'))
 @login_required

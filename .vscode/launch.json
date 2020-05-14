@@ -25,8 +25,8 @@
                 "--host=localhost"
                 //"--no-reload"
             ],
-            "jinja": true
-            //"preLaunchTask":"Generate requirements"
+            "jinja": true,
+            "preLaunchTask":"Generate requirements"
         }
     ]
 }

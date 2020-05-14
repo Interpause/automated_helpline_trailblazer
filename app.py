@@ -1,11 +1,17 @@
 from source import make_app,database
+from flask import render_template,g,redirect,url_for
 app = make_app()
 
 @app.route("/secret")
 def test():
     return app.config['SERVER_VERSION']
 
-#temporarily disable all forms of caching of local files for testing purposes
+@app.route("/")
+def index():
+    return redirect(url_for('news.index'))
+
+#TODO: replace all filter functions with async fetching by client
+#TODO: temporarily disable all forms of caching of local files for testing purposes
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 @app.after_request
 def add_header(r):
@@ -18,3 +24,5 @@ def add_header(r):
     r.headers["Expires"] = "0"
     r.headers['Cache-Control'] = 'public, max-age=0'
     return r
+
+import passlib, phonenumbers

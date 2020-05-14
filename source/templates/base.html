@@ -3,12 +3,13 @@
 <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.jpeg') }}">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<!--<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>-->
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link href="{{ url_for('static',filename='css/style.css') }}" rel="stylesheet">
 {% block head %}{% endblock %}
 
-<nav class = "navbar navbar-expand-lg navbar-light bg-light">
+<nav class = "navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <a class="navbar-brand skiptranslate" href="/"><img class="d-inline-block align-top" style="height:2rem;width:2rem;" src="{{ url_for('static', filename='img/logo.jpeg') }}" alt="">‌ Burden Brothers</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -20,14 +21,16 @@
             <a class="nav-item nav-link active" href="{{ url_for('auth.register') }}">Register</a>
             <a class="nav-item nav-link active" href="{{ url_for('auth.login') }}">Login</a>
             {% endif %}
+            <a class="nav-item nav-link active" href="{{ url_for('forum.index') }}">Forum</a>
+            <a class="nav-item nav-link active" href="{{ url_for('news.index') }}">Resources</a>
         </div>
         {% block nav %}{% endblock %}
     </div>
 </nav>
 
-<header>{%- block header -%}{%- endblock -%}</header>
+<header class="mt-5">{%- block header -%}{%- endblock -%}</header>
 
-<section class="content">
+<section class="content mb-5" id='main'>
     {% block content %}
     <div class="position-fixed w-100 h-30 fixed-bottom" style="z-index:2000;" aria-live="polite" aria-atomic="true">
         <div class="float-right">

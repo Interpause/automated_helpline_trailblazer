@@ -1,6 +1,7 @@
 Flask==1.1.1
 flask_minify==0.18
 flask_sqlalchemy==2.4.1
+newspaper==0.1.0.7
+passlib==1.7.2
+phonenumbers==8.12.3
 sqlalchemy_utils==0.36.5
-passlib
-phonenumbers
