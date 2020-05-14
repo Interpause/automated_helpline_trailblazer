@@ -1,4 +1,4 @@
-:root {font-size:2vh;}
+:root {font-size:1.8vh;}
 #google_translate_element > div > div {display:inline-flex;}
 .goog-te-gadget-simple {font-size:1rem !important;}
 .goog-te-gadget-icon {
@@ -7,3 +7,11 @@
     background-position: 1.5rem 0px !important;
     background-size: cover !important;
 }
+.icon{
+    width:4rem;
+    height:auto;
+    margin:0 0.2rem 0 0.2rem !important;
+
+}
+.media{max-width:100%;overflow:hidden;}
+.media-body{overflow:hidden;word-wrap:break-word;}

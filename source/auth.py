@@ -1,7 +1,7 @@
 from flask import Blueprint, current_app, flash, g, redirect, render_template, request, session, url_for
 from uuid import uuid4
 from datetime import datetime
-import functools
+import functools,re
 
 #is a wrapper TODO: smth along the lines of redirecting to the original page after login using referrer=url or smth
 def login_required(view):
@@ -29,10 +29,10 @@ def register():
         username = request.form['username']
         password = request.form['password']
         try:
-            if not username: raise ValueError('Username is required~')
-            if not password: raise ValueError('Password is required~')
+            if not re.match(r'^\S{1,20}$',username): raise ValueError('Username is invalid~') 
+            if not re.match(r'^.{1,25}$',password): raise ValueError('Password is invalid~')
 
-            if g.db_users.query.filter_by(username=username).first() is not None: raise LookupError(f'Username {username} is already registered~')
+            if g.db_users.query.filter_by(username=username).first() is not None: raise LookupError(f'Username {username} is already registered~') #TODO: check should also look for semantically similar/lowercase same names (multilinguage support)
 
             user = g.db_users(
                 uuid = uuid4(), #feck it i can't one-line anti-collision, not that it will ever happen
@@ -42,7 +42,7 @@ def register():
             )
             g.db_sess.add(user) #auto-saved on request teardown
 
-            flash('Registration successful! Login now~')
+            flash('Registration successful!‌ Login now~')
             return redirect(url_for('auth.login'))
 
         except Exception as e:

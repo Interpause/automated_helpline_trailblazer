@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}Posts{% endblock %}</h1>
+{% endblock %}
+
+{% block nav %}
+<form class="form-inline my-2 my-lg-0" method='get'>
+    <input class="form-control mr-sm-2" type="search" name="query" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+</form>
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+{% for post in posts|reverse %}
+{%- set user = post['user_uuid'] | getUser -%}
+<article class="media">
+    <div class='text-center icon'>
+        <img class="w-100 h-auto m-0 p-0" src="{% if user.picture %}data:image/jpeg;base64,{{user.picture}}{% else %}{{ url_for('static', filename='img/logo.jpeg') }}{% endif %}">
+        <a class="d-inline-block align-top m-0 p-0 skiptranslate" style='line-height:1;font-size:0.7rem;' href="#">{{ user['username'] }}</a>
+    </div>
+    <div class="media-body">
+        <h4 class="my-0">{{ post['title'] }}</h4>
+        <nav class="nav my-0 py-0">
+            <a class="nav-link small my-0 py-0 pl-0 pr-3" href="#">Comments <span class="badge badge-pill badge-secondary">{{ range(4, 20) | random }}</span></a>
+            <a class="nav-link small my-0 py-0 pl-0 pr-3" href="#">Share <span class="badge badge-pill badge-secondary">{{ range(2, 10) | random }}</span></a>
+            <a class="nav-link small my-0 py-0 pl-0 pr-3" href="#">Bookmark <span class="badge badge-pill badge-secondary">{{ range(4, 20) | random }}</span></a>
+            {% if g.user['uuid'] == post['user_uuid'] %}<a class="nav-link small my-0 py-0 pl-0 pr-3" href="{{ url_for('forum.update', id=post['uuid']) }}">Edit</a>{% endif %}
+            <a class="nav-link small my-0 ml-auto mr-1 p-0 text-muted" href="#">Report</a>
+            <small class='ml-1 mr-1 text-muted text-break skiptranslate'>{{ post['created_time'].strftime('%Y-%m-%d') }}</small>
+        </nav>
+    </div>
+</article>
+{%- if not loop.last -%}<hr>{%- endif -%}
+{% endfor %}
+{% endblock %}
+
+<!-- TODO:
+https://getbootstrap.com/docs/4.5/components/badge/ 
+https://getbootstrap.com/docs/4.5/components/spinners/
+https://getbootstrap.com/docs/4.5/components/pagination/
+https://getbootstrap.com/docs/4.5/components/card/
+
+-->
+{% block footer %}
+{% if g.user %}
+<div class="d-inline-flex float-right p-0">
+    <a class="btn rounded-circle btn-primary p-0 m-3" style="height:3rem;width:3rem;" href="{{ url_for('forum.create') }}">
+        <span class="align-bottom material-icons skiptranslate" style="line-height:0;font-size:2rem;">add</span>
+    </a>
+</div>
+{% endif %}
+{% endblock %}

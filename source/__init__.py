@@ -1,5 +1,5 @@
 from flask_minify import minify
-from . import auth,database,blog
+from . import auth,database,forum
 import functools
 def register(func):
     @functools.wraps(func)
@@ -7,13 +7,13 @@ def register(func):
         app = func(*args,**kwargs)
 
         app.logger.debug("Registering hooks...")
-        #minify(app=app, html=True, js=True, cssless=True) TODO: disabled during debugging
+        #minify(app=app, html=True, js=True, cssless=True) #TODO: disabled during debugging due to caching. Too aggressively removing HTML spaces. Current workaround using U+200C
         db_adder = database.register_db(app)
         app.before_request(db_adder)
 
         app.logger.debug("Registering blueprints...")
         app.register_blueprint(auth.bp)
-        app.register_blueprint(blog.bp)
+        app.register_blueprint(forum.bp)
         
         app.add_url_rule('/', endpoint='index')
         return app

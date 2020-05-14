@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class='d-flex pt-5 w-75 m-auto' style='max-width:28rem'>
+    <form method='post' class='w-100'>
+        {% block form %}
+        <h1 class="h3 mb-3 font-weight-normal text-center">{{ prompt }}</h1>
+        {%- for message in get_flashed_messages() -%}
+        <div class="alert alert-primary" role="alert">{{ message }}</div>
+        {%- endfor -%}
+        <div class="form-group">
+            <label class='sr-only' for="username">Username</label>
+            <input class="form-control" name="username" id="username" placeholder='Username' pattern="\S{1,20}" oninvalid="setCustomValidity('Username must not contain spaces and can have 20 letters at most.')" oninput="setCustomValidity('')" maxlength=20 required>
+            <small class="form-text text-muted">Username must not contain spaces and can have 20 letters at most.</small>
+        </div>
+        <div class="form-group">
+            <label class='sr-only' for="password">Password</label>
+            <input class="form-control" type="password" name="password" id="password" placeholder='Password' pattern=".{1,25}" oninvalid="setCustomValidity('Passwords can have 25 letters at most.')" oninput="setCustomValidity('')" maxlength=25 required>
+            <small class="form-text text-muted">Passwords can have 25 letters at most.</small>
+        </div>
+        {% endblock %}
+        <button class="btn btn-lg btn-primary btn-block" type="submit">{{ prompt }}</button>
+        <p class="mt-3 text-center"><a href="{{ redirect_url }}">{{ redirect_prompt }}</a></p>
+        <p class="mt-3 text-center">Passwords are properly hashed & HTTPS is used, for testing purposes just create a burner account - Interpause</p>
+    </form>
+</div>
+<script>
+    
+</script>
+{% endblock %}

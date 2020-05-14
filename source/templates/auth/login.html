@@ -1,0 +1,10 @@
+{% extends 'auth/auth_base.html' %}
+
+{% set prompt="login" %}
+{% set redirect_prompt="Register for an account?" %}
+{% set redirect_url=url_for('auth.register') %}
+{% block prompt %}{% block title %}{{ prompt }}{% endblock %}{% endblock %}
+
+{% block form %}
+{{ super() }}
+{% endblock %}

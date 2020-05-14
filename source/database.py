@@ -11,6 +11,7 @@ def make_user_table(db):
         name = db.Column(db.String(150), nullable = True)
         phone = db.Column(PhoneNumberType(region='SG'), nullable = True)
         pdpa = db.Column(db.String(20), nullable = True)
+        picture = db.Column(db.LargeBinary,nullable = False)
 
         last_activity_time = db.Column(db.DateTime, nullable = True)
         created_time = db.Column(db.DateTime, nullable = False)
@@ -18,16 +19,6 @@ def make_user_table(db):
 
         __tablename__ = 'Users'
         def __repr__(self): return f'<User: {self.uuid}>'
-    if User.query.get('00000000-0000-0000-0000-000000000000') == None:
-        from datetime import datetime
-        from uuid import uuid4
-        holder = User(
-            uuid = '00000000-0000-0000-0000-000000000000',
-            username = 'SYSTEM',
-            passwd = str(uuid4()),
-            created_time = datetime.utcnow()
-        )
-        db.session.add(holder)
     return User
 
 def make_post_table(db):
@@ -49,6 +40,17 @@ def register_db(app):
     User = make_user_table(db)
     Post = make_post_table(db)
     db.create_all()
+
+    if User.query.get('00000000-0000-0000-0000-000000000000') == None:
+        from datetime import datetime
+        from uuid import uuid4
+        holder = User(
+            uuid = '00000000-0000-0000-0000-000000000000',
+            username = 'Admin',
+            passwd = str(uuid4()),
+            created_time = datetime.utcnow()
+        )
+        db.session.add(holder)
     db.session.commit()
 
     #@app.before_request

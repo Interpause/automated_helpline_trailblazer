@@ -3,25 +3,25 @@
 <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.jpeg') }}">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link href="{{ url_for('static',filename='css/style.css') }}" rel="stylesheet">
 {% block head %}{% endblock %}
 
-<nav class = "navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand skiptranslate" href="/"><img class="d-inline-block align-top" style="height:2rem;width:2rem;" src="{{ url_for('static', filename='img/logo.jpeg') }}" alt=""> Burden Brothers</a>
+<nav class = "navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand skiptranslate" href="/"><img class="d-inline-block align-top" style="height:2rem;width:2rem;" src="{{ url_for('static', filename='img/logo.jpeg') }}" alt="">‌ Burden Brothers</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <div class="navbar-nav mr-auto">
             {% if g.user %}
-            <a class="nav-item nav-link active" href="#">Welcome <b class="skiptranslate">{{ g.user['username'] }}</b>!</a>
+            <a class="nav-item nav-link active" href="#">Welcome ‌<b class="skiptranslate">{{ g.user['username'] }}</b>!</a>
             <a class="nav-item nav-link active" href="{{ url_for('auth.logout') }}">Logout</a>
             {% else %}
             <a class="nav-item nav-link active" href="{{ url_for('auth.register') }}">Register</a>
             <a class="nav-item nav-link active" href="{{ url_for('auth.login') }}">Login</a>
             {% endif %}
         </div>
+        {% block nav %}{% endblock %}
     </div>
 </nav>
 
@@ -29,7 +29,7 @@
 
 <section class="content">
     {% block content %}
-    <div class="position-fixed w-100 h-30 fixed-bottom" aria-live="polite" aria-atomic="true">
+    <div class="position-fixed w-100 h-30 fixed-bottom" style="z-index:2000;" aria-live="polite" aria-atomic="true">
         <div class="float-right">
             {%- for message in get_flashed_messages() -%}
             <div class="toast mw-100 m-3" role="alert" aria-live="assertive" aria-atomic="true">
@@ -50,26 +50,24 @@
     {% endblock %}
 </section>
 
-<footer class="fixed-bottom container-fluid">
-    <div class="row row-cols-1">
-        {%- block footer -%}{%- endblock -%}
-        <div class="col d-flex p-0">
-            <i class="material-icons skiptranslate align-self-center" style="font-size:270%">language</i>
-            <span id="google_translate_element" class='align-self-center'>
-                <h3 class='placeholder'>Loading translator...</h3>
-                <script type="text/javascript">
-                    function googleTranslateElementInit() {
-                        new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
-                        document.querySelector('#google_translate_element .placeholder').remove();
-                    }
-                    setTimeout(()=>{
-                        let script = document.createElement('script');
-                        script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-                        script.type = 'text/javascript';
-                        document.querySelector('#google_translate_element').appendChild(script);
-                    },0);
-                </script>
-            </span>
-        </div>
+<footer class="fixed-bottom d-flex justify-content-between container-fluid p-0">
+    <div class="d-inline-flex align-self-end">
+        <i class="material-icons skiptranslate align-self-center" style="font-size:270%">language</i>
+        <span id="google_translate_element" class='align-self-center'>
+            <h3 class='placeholder'>Loading translator...</h3>
+            <script type="text/javascript">
+                function googleTranslateElementInit() {
+                    new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+                    document.querySelector('#google_translate_element .placeholder').remove();
+                }
+                setTimeout(()=>{
+                    let script = document.createElement('script');
+                    script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+                    script.type = 'text/javascript';
+                    document.querySelector('#google_translate_element').appendChild(script);
+                },0);
+            </script>
+        </span>
     </div>
+    {%- block footer -%}{%- endblock -%}   
 </footer>

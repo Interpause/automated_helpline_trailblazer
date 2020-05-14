@@ -2,3 +2,5 @@ Flask==1.1.1
 flask_minify==0.18
 flask_sqlalchemy==2.4.1
 sqlalchemy_utils==0.36.5
+passlib
+phonenumbers

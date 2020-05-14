@@ -1,4 +1,4 @@
-from flaskr import make_app,database
+from source import make_app,database
 app = make_app()
 
 @app.route("/secret")
