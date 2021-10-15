@@ -36,7 +36,7 @@ def make_user_table(db):
 def make_news_table(db,articles,logger):
     class News(db.Model):
         uuid = db.Column(UUIDType(), primary_key = True)
-        url = db.Column(db.Text, unique = True)
+        url = db.Column(db.Text, nullable = False)
         title = db.Column(db.Text, nullable = False)
         picture = db.Column(URLType,nullable = True)
         icon = db.Column(URLType,nullable = True)

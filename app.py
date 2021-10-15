@@ -26,3 +26,43 @@ def add_header(r):
     return r
 
 import passlib, phonenumbers
+
+'''
+import source
+from flask import g
+import pickle
+app = source.make_app()
+db_adder,_ = source.database.register_db(app)
+raw = []
+with app.app_context():
+	db_adder()
+	raw = g.db_news.query.all()
+data = []
+for news in raw:
+	row = {}
+	row['uuid'] = news.uuid.bytes
+	row['url'] = news.url
+	row['title'] = news.title
+	row['picture'] = news.picture
+	row['icon'] = news.icon
+	row['body'] = news.body
+	row['publish_time'] = news.publish_time
+	data.append(row)
+with open('news.pkl','wb') as f:
+	pickle.dump(data,f,protocol=pickle.HIGHEST_PROTOCOL)
+
+
+#server side
+from sqlalchemy import MetaData,create_engine
+import pickle
+news = None
+with open('news.pkl','rb') as f:
+	news = pickle.load(f)
+SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{hostname}/{databasename}".format(username="Interpause",password="thisisagoodpassword",hostname="Interpause.mysql.pythonanywhere-services.com",databasename="Interpause$burdenbrother")
+engine = create_engine(SQLALCHEMY_DATABASE_URI)
+meta = MetaData(bind=engine)
+meta.reflect()
+table = meta.tables['News']
+with engine.begin() as connection:
+	connection.execute(table.insert(),news)
+'''
